@@ -1,0 +1,80 @@
+<!--هذا عرض فقط بشكل رسم اذا قدمو العملاء على الوظايف -->
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تم إرسال طلبك بنجاح | وظيفتك بلمستنا</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: linear-gradient(135deg, #1f1c2c, #928dab); 
+            color: #fff;
+            text-align: center; 
+            margin: 0; 
+            padding: 20px; 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .card { 
+            background: rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 650px; 
+            width: 100%;
+            padding: 40px; 
+            border-radius: 20px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3); 
+        }
+        h1 { color: #4cd137; margin-bottom: 10px; font-size: 28px; }
+        p { color: #f5f6fa; font-size: 16px; line-height: 1.6; margin-bottom: 25px; }
+        
+        /* حاوية المجسم ثلاثي الأبعاد 3D */
+        .spline-container {
+            width: 100%;
+            height: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .back-btn { 
+            display: inline-block; 
+            padding: 15px 40px; 
+            text-decoration: none; 
+            border-radius: 50px; 
+            font-weight: bold; 
+            color: white; 
+            background: #e84118; 
+            transition: all 0.4s ease; 
+            box-shadow: 0 5px 15px rgba(232, 65, 24, 0.4);
+            font-size: 16px;
+        }
+        .back-btn:hover { 
+            background: #c23616; 
+            transform: scale(1.08); 
+            box-shadow: 0 8px 20px rgba(232, 65, 24, 0.6); 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>تم استلام سيرتك الذاتية بنجاح!</h1>
+        <p>شكراً لثقتك بـ "وظيفتك بلمستنا". تم إرسال ملفك وبياناتك مباشرة إلى النظام،وفالك التوفيق والخير.</p>
+        
+        <!-- مجسم ثلاثي الأبعاد تفاعلي وفخم باستخدام Spline -->
+        <div class="spline-container">
+            <iframe src="https://my.spline.design/cube-458140bc52655b38d3883a992e597148/" frameborder="0" width="100%" height="100%"></iframe>
+        </div>
+
+        <!-- زر الرجوع للصفحة الرئيسية -->
+        <a href="index.html" class="back-btn">الرجوع للرئيسية</a>
+    </div>
+
+</body>
+</html>
