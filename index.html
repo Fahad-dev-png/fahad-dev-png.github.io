@@ -69,13 +69,17 @@
         
         <img src="ptwo.png" alt="صورة عمل">
 
-        <!-- قسم التقديم السريع (النسخة المنظفة والخالية من التكرار مع زر رفع الملفات) -->
+        <!-- قسم التقديم السريع (مدعوم برفع الملفات الحقيقي عبر Web3Forms) -->
         <div id="quick-apply" style="margin-top: 30px; text-align: right; background: #fff5f5; padding: 20px; border-radius: 10px; border: 1px solid #ffcccc;">
             <h2 style="color: #d32f2f;">التقديم التقني السريع على الجهات</h2>
-            <p style="color: #555; font-size: 14px;">عبي بياناتك، ارفع سيرتك الذاتية (PDF)، واضغط زر التقديم السريع.</p>
+            <p style="color: #555; font-size: 14px;">عبي بياناتك، ارفع سيرتك الذاتية (PDF):</p>
             
             <!-- نموذج إدخال بيانات التقديم السريع -->
-            <form id="quickApplyForm">
+            <form action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data" id="quickApplyForm">
+                
+                <!-- مفتاح الربط السري الخاص بك -->
+                <input type="hidden" name="access_key" value="10335a9f-3baf-4612-a490-1e25b217b205">
+                
                 <!-- حقل إدخال اسم المتقدم الكامل -->
                 <input type="text" name="applicant_name" placeholder="الاسم الرباعي" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
                 
@@ -84,10 +88,10 @@
             
                 <!-- حقل إرفاق السيرة الذاتية (ملف PDF حقيقي من الجهاز) -->
                 <label style="display: block; margin-top: 10px; font-size: 14px; color: #555; font-weight: bold;">إرفاق السيرة الذاتية (PDF):</label>
-                <input type="file" name="cv_file" accept=".pdf" required style="width: 100%; padding: 8px; margin: 5px 0 10px 0; border: 1px solid #ccc; border-radius: 5px; background: #fff;">
+                <input type="file" name="attachment" accept=".pdf" required style="width: 100%; padding: 8px; margin: 5px 0 10px 0; border: 1px solid #ccc; border-radius: 5px; background: #fff;">
                 
                 <!-- حقل كتابة نبذة تعريفية قصيرة عن المتقدم -->
-                <textarea name="message" placeholder="نبذة بسيطه من أنجازاتك الحافله" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; height: 80px;"></textarea>
+                <textarea name="message" placeholder="نبذة بسيطه عن أنجازاتك الحافله" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; height: 80px;"></textarea>
                 
                 <!-- زر تقديم الطلب -->
                 <button type="submit" id="applyBtn" style="width: 100%; padding: 15px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 16px;">SUBMIT</button>
@@ -111,7 +115,7 @@
             <div style="margin-top: 40px; padding: 20px; text-align: right; background: #fff; border-radius: 10px; border: 1px solid #eee;">
                 <h2>لماذا تختار "وظيفتك بلمستنا"؟</h2>
                 <p style="line-height: 1.8; color: #555;">
-                    نحن نؤمن أن البحث عن وظيفة لا يجب أن يكون عملية معقدة. هدفنا هو تجميع أفضل الفرص الوظيفية المتاحة وتنسيقها في مكان واحد. سواء كنت خريجاً جديداً تبحث عن أولى خطواتك المهنية، أو محترفاً يسعى لتطوير مساره، فإننا نوفر لك الموارد والنصائح التي تحتاجها لاجتياز المقابلات وبناء سيرة ذاتية احترافية.
+                    نحن نؤمن أن البحث عن وظيفة لا يجب أن يكون عملية معقدة. هدفنا هو تجميع أفضل الفرص الوظيفية المتاحة وتنسيقها في مكان واحد. سواء كنت خريجاً جديداً تبحث عن أولى خطواتك المهنية، أو محترفاً يسعى لتطوير مساره فإننا نوفر لك الموارد والنصائح التي تحتاجها لاجتياز المقابلات وبناء سيرة ذاتية احترافية.
                 </p>
             </div>
             
@@ -147,7 +151,7 @@
         <button onclick="acceptCookies()" style="margin-right: 20px; padding: 10px 25px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold;">موافق</button>
     </div>
 
-    <!-- أكواد جافا سكريبت التفاعلية للتحكم بالكوكيز وإرسال النماذج برمجياً -->
+    <!-- أكواد جافا سكريبت التفاعلية للتحكم بالكوكيز -->
     <script>
         // دالة قبول الكوكيز وإخفاء الشريط وحفظ الموافقة في المتصفح
         function acceptCookies() {
@@ -159,43 +163,6 @@
         if (!localStorage.getItem('cookiesAccepted')) {
             document.getElementById('cookie-banner').style.display = 'block';
         }
-
-        // كود معالجة وإرسال نموذج التقديم السريع بدون مغادرة الصفحة (AJAX)
-        const quickForm = document.getElementById('quickApplyForm');
-        const formStatus = document.getElementById('formStatus');
-
-        quickForm.addEventListener('submit', async function(e) {
-            e.preventDefault(); // منع إعادة تحميل الصفحة الافتراضية
-            formStatus.style.color = "blue";
-            formStatus.innerText = "جاري إرسال طلبك للجهة... ";
-
-            const formData = new FormData(quickForm);
-
-            try {
-                // إرسال البيانات والملف المرفق إلى خادم Formspree
-                const response = await fetch("https://formspree.io/f/mpqedjdd", {
-                    method: "POST",
-                    body: formData,
-                    headers: {
-                        'Accept': 'json'
-                    }
-                });
-
-                // التحقق من نجاح عملية الاستجابة والإرسال
-                if (response.ok) {
-                    formStatus.style.color = "green";
-                    formStatus.innerText = "تم إرسال بياناتك بنجاح للجهة ";
-                    quickForm.reset(); // تصفير الحقول بعد النجاح
-                } else {
-                    formStatus.style.color = "red";
-                    formStatus.innerText = "عذراً، حدث خطأ أثناء الإرسال. حاول مرة أخرى.";
-                }
-            } catch (error) {
-                // معالجة خطأ الشبكة أو الاتصال
-                formStatus.style.color = "red";
-                formStatus.innerText = "فشل الاتصال بالخادم، تأكد من اتصالك بالإنترنت.";
-            }
-        });
     </script>
 </body>
 </html>
