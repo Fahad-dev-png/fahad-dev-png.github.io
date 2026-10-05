@@ -74,26 +74,33 @@
             <h2 style="color: #d32f2f;">التقديم التقني السريع على الجهات</h2>
             <p style="color: #555; font-size: 14px;">عبي بياناتك، واضغط زر التقديم السريع لتصل رسالتك مباشرة.</p>
             
+          <!-- قسم التقديم السريع الجديد مع زر رفع الملفات الحقيقي -->
+        <div id="quick-apply" style="margin-top: 30px; text-align: right; background: #fff5f5; padding: 20px; border-radius: 10px; border: 1px solid #ffcccc;">
+            <h2 style="color: #d32f2f;">التقديم التقني السريع على الجهات</h2>
+            <p style="color: #555; font-size: 14px;">عبي بياناتك، ارفع سيرتك الذاتية (PDF)، واضغط زر التقديم السريع.</p>
+            
             <!-- نموذج التقديم السريع -->
             <form id="quickApplyForm">
                 <!-- حقل إدخال الاسم الكامل -->
-                <input type="text" name="applicant_name" placeholder="Full-Name" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                <input type="text" name="applicant_name" placeholder="FullName" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
                 
                 <!-- حقل إدخال البريد الإلكتروني للمتقدم -->
-                <input type="email" name="applicant_email" placeholder="Your-Email" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                <input type="email" name="applicant_email" placeholder="YourEmail" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
                 
                 <!-- حقل إدخال إيميل الشركة المستهدفة -->
-                <input type="text" name="company_target" placeholder="Company Email" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                <input type="text" name="company_target" placeholder="CompanyEmail" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
                 
-                <!-- حقل إدخال رابط السيرة الذاتية (Google Drive أو غيره) -->
-                <input type="url" name="cv_link" placeholder="CV Link (Google Drive أو غيره)" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                <!-- حقل إرفاق السيرة الذاتية (ملف PDF حقيقي من الجهاز) -->
+                <label style="display: block; margin-top: 10px; font-size: 14px; color: #555; font-weight: bold;">إرفاق السيرة الذاتية (PDF):</label>
+                <input type="file" name="cv_file" accept=".pdf" required style="width: 100%; padding: 8px; margin: 5px 0 10px 0; border: 1px solid #ccc; border-radius: 5px; background: #fff;">
                 
                 <!-- حقل كتابة النبذة المختصرة عن المتقدم -->
-                <textarea name="message" placeholder="نبذة مختصرة" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; height: 80px;"></textarea>
+                <textarea name="message" placeholder="Brief Overview" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; height: 80px;"></textarea>
                 
                 <!-- زر إرسال التقديم -->
-                <button type="submit" id="applyBtn" style="width: 100%; padding: 15px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 16px;">اضغط هنا للتقديم السريع</button>
+                <button type="submit" id="applyBtn" style="width: 100%; padding: 15px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 16px;">SUBMIT</button>
             </form>
+            
             
             <!-- عنصر لعرض حالة الإرسال (نجاح أو خطأ) -->
             <p id="formStatus" style="margin-top: 15px; font-weight: bold; text-align: center;"></p>
