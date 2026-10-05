@@ -1,15 +1,16 @@
 <!--هذا عرض فقط بشكل رسم اذا قدمو العملاء على الوظايف -->
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <title>تم إرسال طلبك بنجاح | وظيفتك بلمستنا</title>
     <style>
-        /* تنسيق عام للصفحة والخلفية المتدرجة */
+        /* تنسيق عام مع خلفية متدرجة فخمة وأنيميشن هادئ للإضاءة */
         body { 
-            font-family: 'Segoe UI', sans-serif; 
-            background: linear-gradient(135deg, #1f1c2c, #928dab); 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: linear-gradient(135deg, #0f172a, #1e1b4b, #311042); 
+            background-size: 300% 300%;
+            animation: gradientBG 12s ease infinite;
             color: #fff;
             text-align: center; 
             margin: 0; 
@@ -19,91 +20,122 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            overflow-x: hidden;
         }
 
-        /* تنسيق بطاقة العرض بتأثير الزجاج المطمش (Glassmorphism) */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* بطاقة الزجاج المطور (Glassmorphism) مع حدود متوهجة خفيفة */
         .card { 
-            background: rgba(255, 255, 255, 0.1); 
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             max-width: 650px; 
             width: 100%;
-            padding: 40px; 
-            border-radius: 20px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3); 
+            padding: 50px 30px; 
+            border-radius: 24px; 
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2); 
+            transform: translateY(0);
+            animation: slideUp 0.8s ease-out;
         }
 
-        h1 { color: #4cd137; margin-bottom: 10px; font-size: 28px; }
-        p { color: #f5f6fa; font-size: 16px; line-height: 1.6; margin-bottom: 25px; }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* عنوان رئيسي براق وملفت */
+        h1 { 
+            color: #4ade80; 
+            margin-bottom: 15px; 
+            font-size: 32px; 
+            font-weight: 800;
+            text-shadow: 0 0 20px rgba(74, 222, 128, 0.4);
+        }
+
+        /* نص التوضيح بمرونة عالية */
+        p { 
+            color: #cbd5e1; 
+            font-size: 17px; 
+            line-height: 1.8; 
+            margin-bottom: 35px; 
+        }
         
-        /* حاوية المجسم ثلاثي الأبعاد والعمق البصري */
+        /* حاوية المكعب ثلاثي الأبعاد */
         .scene3d {
             width: 100%;
             height: 220px;
             display: flex;
             justify-content: center;
             align-items: center;
-            perspective: 1000px; /* يعطي إيحاء العمق والأبعاد الثلاثية */
-            margin-bottom: 25px;
+            perspective: 1000px;
+            margin-bottom: 35px;
         }
 
-        /* هيكل المكعب الذي سيتحرك في الأبعاد الثلاثة */
+        /* هيكل المكعب المتحرك */
         .cube {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             position: relative;
-            transform-style: preserve-3d; /* يحافظ على أبعاد العناصر بداخله كـ 3D */
-            animation: rotateCube 8s infinite linear; /* حركة دوران مستمرة وناعمة */
+            transform-style: preserve-3d;
+            animation: rotateCube 9s infinite linear;
         }
 
-        /* تنسيق وجوه المكعب الستة المشتركة */
+        /* وجوه المكعب بتصميم زجاجي متوهج */
         .cube-face {
             position: absolute;
-            width: 100px;
-            height: 100px;
-            background: rgba(76, 209, 55, 0.15);
-            border: 2px solid #4cd137;
-            border-radius: 12px;
+            width: 110px;
+            height: 110px;
+            background: rgba(74, 222, 128, 0.1);
+            border: 2px solid rgba(74, 222, 128, 0.6);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
-            box-shadow: 0 0 20px rgba(76, 209, 55, 0.3);
+            font-size: 45px;
+            box-shadow: 0 0 25px rgba(74, 222, 128, 0.25);
+            backdrop-filter: blur(4px);
         }
 
-        /* توزيع الوجوه في الفراغ ثلاثي الأبعاد (Z, Y, X) لتشكيل المكعب */
-        .cube-face-front  { transform: translateZ(50px); }
-        .cube-face-back   { transform: rotateY(180deg) translateZ(50px); }
-        .cube-face-right  { transform: rotateY(90deg) translateZ(50px); }
-        .cube-face-left   { transform: rotateY(-90deg) translateZ(50px); }
-        .cube-face-top    { transform: rotateX(90deg) translateZ(50px); }
-        .cube-face-bottom { transform: rotateX(-90deg) translateZ(50px); }
+        /* توزيع الأبعاد الثلاثية للمكعب */
+        .cube-face-front  { transform: translateZ(55px); }
+        .cube-face-back   { transform: rotateY(180deg) translateZ(55px); }
+        .cube-face-right  { transform: rotateY(90deg) translateZ(55px); }
+        .cube-face-left   { transform: rotateY(-90deg) translateZ(55px); }
+        .cube-face-top    { transform: rotateX(90deg) translateZ(55px); }
+        .cube-face-bottom { transform: rotateX(-90deg) translateZ(55px); }
 
-        /* حركة الدوران المستمرة للمكعب بزوايا كاملة */
+        /* حركة الدوران المستمرة للمكعب */
         @keyframes rotateCube {
             0% { transform: rotateX(0deg) rotateY(0deg); }
             100% { transform: rotateX(360deg) rotateY(360deg); }
         }
 
-        /* تنسيق زر الرجوع للصفحة الرئيسية مع تأثيرات التفاعل */
+        /* زر الرجوع الفخم بتدرج لوني وتأثير حركي ناعم */
         .back-btn { 
             display: inline-block; 
-            padding: 15px 40px; 
+            padding: 16px 45px; 
             text-decoration: none; 
             border-radius: 50px; 
-            font-weight: bold; 
+            font-weight: 700; 
             color: white; 
-            background: #e84118; 
-            transition: all 0.4s ease; /* نعومة الحركة عند التفاعل */
-            box-shadow: 0 5px 15px rgba(232, 65, 24, 0.4);
-            font-size: 16px;
+            background: linear-gradient(135deg, #f43f5e, #e11d48); 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            box-shadow: 0 10px 25px rgba(225, 29, 72, 0.4);
+            font-size: 17px;
+            letter-spacing: 0.5px;
         }
         
-        /* تأثير التكبير والظل عند المرور بالماوس فوق الزر */
+        /* تأثير التفاعل عند تمرير الماوس */
         .back-btn:hover { 
-            background: #c23616; 
-            transform: scale(1.08); 
-            box-shadow: 0 8px 20px rgba(232, 65, 24, 0.6); 
+            transform: translateY(-3px) scale(1.05); 
+            box-shadow: 0 15px 30px rgba(225, 29, 72, 0.6); 
+            background: linear-gradient(135deg, #fb7185, #f43f5e);
         }
     </style>
 </head>
@@ -112,12 +144,11 @@
     <div class="card">
         <!-- رسالة نجاح الإرسال -->
         <h1>تم استلام سيرتك الذاتية بنجاح!</h1>
-        <p>شكراً لثقتك بـ "وظيفتك بلمستنا". تم إرسال ملفك وبياناتك مباشرة إلى النظام، فالك التوفيق.</p>
+        <p>شكراً لثقتك بـ <strong>"وظيفتك بلمستنا"</strong>. تم نقل ملفك وبياناتك الاحترافية إلى النظام فوراً، وفالك التوفيق في مسيرتك المهنية.</p>
         
-        <!-- قسم عرض المكعب المتحرك ثلاثي الأبعاد -->
+        <!-- قسم المكعب المتحرك ثلاثي الأبعاد -->
         <div class="scene3d">
             <div class="cube">
-                <!-- الوجوه الستة للمكعب وتحتوي على رموز تعبيرية تفاعلية -->
                 <div class="cube-face cube-face-front">📄</div>
                 <div class="cube-face cube-face-back">✨</div>
                 <div class="cube-face cube-face-right">✅</div>
@@ -127,12 +158,8 @@
             </div>
         </div>
 
-        <!-- زر الانتقال للعودة للصفحة الرئيسية للموقع -->
+        <!-- زر العودة للرئيسية -->
         <a href="index.html" class="back-btn">الرجوع للرئيسية</a>
-    </div>
-
-</body>
-</html>جوع للرئيسية</a>
     </div>
 
 </body>
