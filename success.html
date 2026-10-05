@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>تم إرسال طلبك بنجاح | وظيفتك بلمستنا</title>
     <style>
+        /* تنسيق عام للصفحة والخلفية المتدرجة */
         body { 
             font-family: 'Segoe UI', sans-serif; 
             background: linear-gradient(135deg, #1f1c2c, #928dab); 
@@ -19,6 +20,8 @@
             justify-content: center;
             align-items: center;
         }
+
+        /* تنسيق بطاقة العرض بتأثير الزجاج المطمش (Glassmorphism) */
         .card { 
             background: rgba(255, 255, 255, 0.1); 
             backdrop-filter: blur(10px);
@@ -29,19 +32,60 @@
             border-radius: 20px; 
             box-shadow: 0 15px 35px rgba(0,0,0,0.3); 
         }
+
         h1 { color: #4cd137; margin-bottom: 10px; font-size: 28px; }
         p { color: #f5f6fa; font-size: 16px; line-height: 1.6; margin-bottom: 25px; }
         
-        /* حاوية المجسم ثلاثي الأبعاد 3D */
-        .spline-container {
+        /* حاوية المجسم ثلاثي الأبعاد والعمق البصري */
+        .scene3d {
             width: 100%;
-            height: 300px;
-            border-radius: 12px;
-            overflow: hidden;
+            height: 220px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px; /* يعطي إيحاء العمق والأبعاد الثلاثية */
             margin-bottom: 25px;
-            background: rgba(0,0,0,0.2);
         }
 
+        /* هيكل المكعب الذي سيتحرك في الأبعاد الثلاثة */
+        .cube {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            transform-style: preserve-3d; /* يحافظ على أبعاد العناصر بداخله كـ 3D */
+            animation: rotateCube 8s infinite linear; /* حركة دوران مستمرة وناعمة */
+        }
+
+        /* تنسيق وجوه المكعب الستة المشتركة */
+        .cube-face {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: rgba(76, 209, 55, 0.15);
+            border: 2px solid #4cd137;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            box-shadow: 0 0 20px rgba(76, 209, 55, 0.3);
+        }
+
+        /* توزيع الوجوه في الفراغ ثلاثي الأبعاد (Z, Y, X) لتشكيل المكعب */
+        .cube-face-front  { transform: translateZ(50px); }
+        .cube-face-back   { transform: rotateY(180deg) translateZ(50px); }
+        .cube-face-right  { transform: rotateY(90deg) translateZ(50px); }
+        .cube-face-left   { transform: rotateY(-90deg) translateZ(50px); }
+        .cube-face-top    { transform: rotateX(90deg) translateZ(50px); }
+        .cube-face-bottom { transform: rotateX(-90deg) translateZ(50px); }
+
+        /* حركة الدوران المستمرة للمكعب بزوايا كاملة */
+        @keyframes rotateCube {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        /* تنسيق زر الرجوع للصفحة الرئيسية مع تأثيرات التفاعل */
         .back-btn { 
             display: inline-block; 
             padding: 15px 40px; 
@@ -50,10 +94,12 @@
             font-weight: bold; 
             color: white; 
             background: #e84118; 
-            transition: all 0.4s ease; 
+            transition: all 0.4s ease; /* نعومة الحركة عند التفاعل */
             box-shadow: 0 5px 15px rgba(232, 65, 24, 0.4);
             font-size: 16px;
         }
+        
+        /* تأثير التكبير والظل عند المرور بالماوس فوق الزر */
         .back-btn:hover { 
             background: #c23616; 
             transform: scale(1.08); 
@@ -64,16 +110,29 @@
 <body>
 
     <div class="card">
+        <!-- رسالة نجاح الإرسال -->
         <h1>تم استلام سيرتك الذاتية بنجاح!</h1>
-        <p>شكراً لثقتك بـ "وظيفتك بلمستنا". تم إرسال ملفك وبياناتك مباشرة إلى النظام،وفالك التوفيق والخير.</p>
+        <p>شكراً لثقتك بـ "وظيفتك بلمستنا". تم إرسال ملفك وبياناتك مباشرة إلى النظام، فالك التوفيث.</p>
         
-        <!-- مجسم ثلاثي الأبعاد تفاعلي وفخم باستخدام Spline -->
-        <div class="spline-container">
-            <iframe src="https://my.spline.design/cube-458140bc52655b38d3883a992e597148/" frameborder="0" width="100%" height="100%"></iframe>
+        <!-- قسم عرض المكعب المتحرك ثلاثي الأبعاد -->
+        <div class="scene3d">
+            <div class="cube">
+                <!-- الوجوه الستة للمكعب وتحتوي على رموز تعبيرية تفاعلية -->
+                <div class="cube-face cube-face-front">📄</div>
+                <div class="cube-face cube-face-back">✨</div>
+                <div class="cube-face cube-face-right">✅</div>
+                <div class="cube-face cube-face-left">💼</div>
+                <div class="cube-face cube-face-top">🚀</div>
+                <div class="cube-face cube-face-bottom">⭐</div>
+            </div>
         </div>
 
-        <!-- زر الرجوع للصفحة الرئيسية -->
+        <!-- زر الانتقال للعودة للصفحة الرئيسية للموقع -->
         <a href="index.html" class="back-btn">الرجوع للرئيسية</a>
+    </div>
+
+</body>
+</html>جوع للرئيسية</a>
     </div>
 
 </body>
