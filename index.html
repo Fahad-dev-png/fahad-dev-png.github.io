@@ -143,14 +143,14 @@
             document.getElementById('cookie-banner').style.display = 'block';
         }
 
-        // إرسال البيانات والملف مباشرة إلى سكربت جوجل الخاص بك
+        // إرسال البيانات والملف لسكربت جوجل والتحويل لصفحة الشكر الفخمة
         const quickForm = document.getElementById('quickApplyForm');
         const formStatus = document.getElementById('formStatus');
 
         quickForm.addEventListener('submit', function(e) {
             e.preventDefault();
             formStatus.style.color = "blue";
-            formStatus.innerText = "جاري رفع السيرة الذاتية وإرسال طلبك... ";
+            formStatus.innerText = "جاري رفع السيرة الذاتية وإرسال طلبك... يرجى الانتظار";
 
             const fileInput = document.getElementById('cv_file');
             const file = fileInput.files[0];
@@ -183,12 +183,11 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.result === "success") {
-                        formStatus.style.color = "green";
-                        formStatus.innerText = "تم إرسال طلبك وسيرتك الذاتية بنجاح!";
-                        quickForm.reset();
+                        // التحويل التلقائي لصفحة الشكر الـ 3D الفخمة
+                        window.location.href = "success.html";
                     } else {
                         formStatus.style.color = "red";
-                        formStatus.innerText = "عذراً، حدث خطأ أثناء الإرسال.";
+                        formStatus.innerText = "عذراً، حدث خطأ أثناء الإرسال. حاول مرة أخرى.";
                     }
                 })
                 .catch(error => {
