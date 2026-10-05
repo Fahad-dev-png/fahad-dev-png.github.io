@@ -69,39 +69,27 @@
         
         <img src="ptwo.png" alt="صورة عمل">
 
-        <!-- قسم التقديم السريع (مدعوم برفع الملفات الحقيقي عبر Web3Forms) -->
+        <!-- قسم التقديم السريع -->
         <div id="quick-apply" style="margin-top: 30px; text-align: right; background: #fff5f5; padding: 20px; border-radius: 10px; border: 1px solid #ffcccc;">
             <h2 style="color: #d32f2f;">التقديم التقني السريع على الجهات</h2>
-            <p style="color: #555; font-size: 14px;">عبي بياناتك، ارفع سيرتك الذاتية (PDF):</p>
+            <p style="color: #555; font-size: 14px;">عبي بياناتك، ارفع سيرتك الذاتية (PDF)، واضغط زر التقديم السريع.</p>
             
-            <!-- نموذج إدخال بيانات التقديم السريع -->
-            <form action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data" id="quickApplyForm">
-                
-                <!-- مفتاح الربط السري الخاص بك -->
-                <input type="hidden" name="access_key" value="10335a9f-3baf-4612-a490-1e25b217b205">
-                
-                <!-- حقل إدخال اسم المتقدم الكامل -->
-                <input type="text" name="applicant_name" placeholder="الاسم الرباعي" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                
-                <!-- حقل إدخال البريد الإلكتروني للمتقدم -->
-                <input type="email" name="applicant_email" placeholder="الايميل الالكتروني" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+            <form id="quickApplyForm">
+                <input type="text" id="applicant_name" placeholder="الاسم الرباعي" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+                <input type="email" id="applicant_email" placeholder="الايميل الالكتروني" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
             
-                <!-- حقل إرفاق السيرة الذاتية (ملف PDF حقيقي من الجهاز) -->
                 <label style="display: block; margin-top: 10px; font-size: 14px; color: #555; font-weight: bold;">إرفاق السيرة الذاتية (PDF):</label>
-                <input type="file" name="attachment" accept=".pdf" required style="width: 100%; padding: 8px; margin: 5px 0 10px 0; border: 1px solid #ccc; border-radius: 5px; background: #fff;">
+                <input type="file" id="cv_file" accept=".pdf" required style="width: 100%; padding: 8px; margin: 5px 0 10px 0; border: 1px solid #ccc; border-radius: 5px; background: #fff;">
                 
-                <!-- حقل كتابة نبذة تعريفية قصيرة عن المتقدم -->
-                <textarea name="message" placeholder="نبذة بسيطه عن أنجازاتك الحافله" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; height: 80px;"></textarea>
+                <textarea id="message" placeholder="نبذة بسيطه من أنجازاتك الحافله" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; height: 80px;"></textarea>
                 
-                <!-- زر تقديم الطلب -->
                 <button type="submit" id="applyBtn" style="width: 100%; padding: 15px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 16px;">SUBMIT</button>
             </form>
             
-            <!-- عنصر مخصص لعرض رسالة حالة الإرسال (نجاح أو خطأ للمستخدم) -->
             <p id="formStatus" style="margin-top: 15px; font-weight: bold; text-align: center;"></p>
         </div>
 
-        <!-- قسم تواصل معنا في حال وجود مشاكل -->
+        <!-- قسم تواصل معنا -->
         <div id="contact" style="margin-top: 30px; text-align: right;">
             <h2>تواصل معنا في حال واجهتك اي مشاكل!</h2>
             <form action="https://formspree.io/f/mpqedjdd" method="POST">
@@ -111,7 +99,6 @@
                 <button type="submit" style="width: 100%; padding: 15px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">إرسل وبالتوفيق</button>
             </form>
             
-            <!-- قسم التعريف بـ "لماذا تختارنا" -->
             <div style="margin-top: 40px; padding: 20px; text-align: right; background: #fff; border-radius: 10px; border: 1px solid #eee;">
                 <h2>لماذا تختار "وظيفتك بلمستنا"؟</h2>
                 <p style="line-height: 1.8; color: #555;">
@@ -119,7 +106,6 @@
                 </p>
             </div>
             
-            <!-- قسم المقالات المهنية المفيدة -->
             <div class="articles" style="margin-top: 40px; padding: 20px; text-align: right; background: #fff; border-radius: 10px; border: 1px solid #eee;">
                 <h2>مقالات مهنية للتوظيف</h2>
                 <ul style="line-height: 2; list-style-type: square;">
@@ -128,14 +114,12 @@
                 </ul>
             </div>
 
-            <!-- قسم من أنا -->
             <div style="margin-top: 30px; text-align: right;">
                 <h3 style="color: #333;">من أنا؟ وش بفيدك فيه؟</h3>
                 <p style="color: #555; line-height: 1.6;">في عالم التوظيف السريع والمتغير، لا يكفي أن تمتلك المهارات فحسب، بل يجب أن تعرف كيف تعرضها لتعكس قيمتك الحقيقية، لذلك صممت خيار "أحدث الوظائف" ومحدث تلقائيا ليجمع لك منصات التوظيف بصفحه وحده لتسهيل عملية التقديم. أنا هنا لأكون شريكك في هذه الرحلة.</p>
             </div>
         </div>
 
-        <!-- تذييل الصفحة (Footer) -->
         <footer style="margin-top: 40px; padding: 20px; color: #888; font-size: 14px; border-top: 1px solid #eee;">
             <p>
                 <a href="https://fahad-dev-png.github.io/" style="text-decoration: none; color: #888;">
@@ -145,24 +129,74 @@
         </footer>
     </div>
 
-    <!-- نافذة تنبيه قبول الكوكيز (Cookies) المنبثقة أسفل الشاشة -->
     <div id="cookie-banner" style="position: fixed; bottom: 0; left: 0; right: 0; background: #333; color: white; padding: 25px; text-align: center; z-index: 1000; display: none; font-size: 18px; box-shadow: 0 -5px 15px rgba(0,0,0,0.2);">
         هذا الموقع يستخدم ملفات تعريف الارتباط (Cookies) لضمان تقديم أفضل تجربة للمستخدم ولأغراض إعلانية.
         <button onclick="acceptCookies()" style="margin-right: 20px; padding: 10px 25px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold;">موافق</button>
     </div>
 
-    <!-- أكواد جافا سكريبت التفاعلية للتحكم بالكوكيز -->
     <script>
-        // دالة قبول الكوكيز وإخفاء الشريط وحفظ الموافقة في المتصفح
         function acceptCookies() {
             document.getElementById('cookie-banner').style.display = 'none';
             localStorage.setItem('cookiesAccepted', 'true');
         }
-        
-        // التحقق عند تحميل الصفحة إذا كان المستخدم قد وافق مسبقاً
         if (!localStorage.getItem('cookiesAccepted')) {
             document.getElementById('cookie-banner').style.display = 'block';
         }
+
+        // إرسال البيانات والملف مباشرة إلى سكربت جوجل الخاص بك
+        const quickForm = document.getElementById('quickApplyForm');
+        const formStatus = document.getElementById('formStatus');
+
+        quickForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            formStatus.style.color = "blue";
+            formStatus.innerText = "جاري رفع السيرة الذاتية وإرسال طلبك... ";
+
+            const fileInput = document.getElementById('cv_file');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                formStatus.style.color = "red";
+                formStatus.innerText = "الرجاء إرفاق ملف السيرة الذاتية.";
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                const base64Data = reader.result.split(',')[1];
+                const payload = {
+                    name: document.getElementById('applicant_name').value,
+                    email: document.getElementById('applicant_email').value,
+                    message: document.getElementById('message').value,
+                    fileName: file.name,
+                    mimeType: file.type,
+                    fileData: base64Data
+                };
+
+                const scriptURL = "https://script.google.com/macros/s/AKfycbxmNXFz-Ea_g2qKmlXfr51HEDjITLVwrFI0nWyS7__IP9WAWGEiiIY7viLhh-Jl-v2n/exec";
+
+                fetch(scriptURL, {
+                    method: "POST",
+                    body: JSON.stringify(payload)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.result === "success") {
+                        formStatus.style.color = "green";
+                        formStatus.innerText = "تم إرسال طلبك وسيرتك الذاتية بنجاح!";
+                        quickForm.reset();
+                    } else {
+                        formStatus.style.color = "red";
+                        formStatus.innerText = "عذراً، حدث خطأ أثناء الإرسال.";
+                    }
+                })
+                .catch(error => {
+                    formStatus.style.color = "red";
+                    formStatus.innerText = "فشل الاتصال بالخادم، تأكد من اتصالك بالإنترنت.";
+                });
+            };
+        });
     </script>
 </body>
 </html>
